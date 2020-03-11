@@ -32,12 +32,18 @@ Osoba MenedzerOsob::dodajOsobe()
 
     if (plik.good() == true)
     {
-        plik << osoba.pobierzId() << endl;
-        plik << osoba.pobierzImie() << endl;
-        plik << osoba.pobierzNazwisko() << endl;
-        plik << osoba.pobierzNumerTelefonu() << endl;
-        plik << osoba.pobierzEmail() << endl;
-        plik << osoba.pobierzAdres() << endl;
+        plik << osoba.pobierzId();
+        plik <<"|";
+        plik << osoba.pobierzImie();
+        plik <<"|";
+        plik << osoba.pobierzNazwisko();
+        plik <<"|";
+        plik << osoba.pobierzNumerTelefonu();
+        plik <<"|";
+        plik << osoba.pobierzEmail();
+        plik <<"|";
+        plik << osoba.pobierzAdres();
+        plik <<"|";
         plik.close();
     }
     else
@@ -75,6 +81,7 @@ void MenedzerOsob::wyswietlWszystkieOsoby()
         for (vector <Osoba> :: iterator itr = osoby.begin(); itr != osoby.end(); itr++)
         {
             wyswietlDaneAdresata(*itr);
+            cout<<endl;
         }
         cout << endl;
     }

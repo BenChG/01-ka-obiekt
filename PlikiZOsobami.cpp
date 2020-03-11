@@ -7,38 +7,51 @@ vector <Osoba> PlikiZOsobami::wczytajOsobyZPliku()
 
     string imie, nazwisko, numerTelefonu, email, adres;
     int id;
-
+    int ostatniZnak[6];
+    string nowyWyraz;
     string linia;
-    int nr_linii = 1;
-    int iloscOsob = 0;
 
     fstream plik;
     plik.open("KsiazkaAdresowa.txt",ios::in);
     if (plik.good() == true)
     {
-        while (getline(plik,linia))
+         while(getline(plik,linia))
+    {
+        int k=0, start=0, dlugoscLinii=linia.length();
+
+        for (int i=0; i<dlugoscLinii; i++)
         {
-            switch (nr_linii)
+            if(linia[i]==124)
             {
-            case 1:
-                id = atoi(linia.c_str());
-                break;
-            case 2:
-                imie = linia;
-                break;
-            case 3:
-                nazwisko = linia;
-                break;
-            case 4:
-                numerTelefonu = linia;
-                break;
-            case 5:
-                email = linia;
-                break;
-            case 6:
-                adres = linia;
-                break;
+                ostatniZnak[k]=i;
+                k++;
             }
+        }
+
+
+        nowyWyraz=linia.substr(start,ostatniZnak[0]-start);
+        id=atoi(linia.c_str());
+        start=ostatniZnak[0]+1;
+
+        nowyWyraz=linia.substr(start,ostatniZnak[1]-start);
+        imie=nowyWyraz;
+        start=ostatniZnak[1]+1;
+
+        nowyWyraz=linia.substr(start,ostatniZnak[2]-start);
+        nazwisko=nowyWyraz;
+        start=ostatniZnak[2]+1;
+
+        nowyWyraz=linia.substr(start,ostatniZnak[3]-start);
+        numerTelefonu=nowyWyraz;
+        start=ostatniZnak[3]+1;
+
+        nowyWyraz=linia.substr(start,ostatniZnak[4]-start);
+        email=nowyWyraz;
+        start=ostatniZnak[4]+1;
+
+        nowyWyraz=linia.substr(start,ostatniZnak[5]-start);
+        adres=nowyWyraz;
+
             osoba.ustawId(id);
             osoba.ustawImie(imie);
             osoba.ustawNazwisko(nazwisko);
@@ -46,17 +59,10 @@ vector <Osoba> PlikiZOsobami::wczytajOsobyZPliku()
             osoba.ustawEmail(email);
             osoba.ustawAdres(adres);
 
-            if (nr_linii >= 6)
-            {
-                osoby.push_back(osoba);
-                nr_linii = 1;
-            }
-            else
-            {
-                nr_linii++;
-            }
+            osoby.push_back(osoba);
         }
         plik.close();
     }
     return osoby;
+
 }
