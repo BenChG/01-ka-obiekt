@@ -81,6 +81,7 @@ void MenedzerOsob::wyswietlWszystkieOsoby()
         for (vector <Osoba> :: iterator itr = osoby.begin(); itr != osoby.end(); itr++)
         {
             wyswietlDaneAdresata(*itr);
+            cout<<endl;
         }
         cout << endl;
     }
