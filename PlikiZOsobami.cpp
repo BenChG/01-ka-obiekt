@@ -66,3 +66,27 @@ vector <Osoba> PlikiZOsobami::wczytajOsobyZPliku()
     return osoby;
 
 }
+
+ vector <string> PlikiZOsobami::wczytajLinieZPlikuDoWektora ()
+{
+    vector <string> linieAdresatow;
+    string linia;
+    fstream plik;
+    linieAdresatow.clear();
+
+    plik.open("KsiazkaAdresowa.txt",ios::in);
+
+    if (plik.good()==false)
+    {
+        ofstream plik("KsiazkaAdresowa.txt");
+        plik.open("KsiazkaAdresowa.txt",ios::in);
+    }
+
+    while(getline(plik,linia))
+    {
+        linieAdresatow.push_back(linia);
+    }
+    plik.close();
+
+    return linieAdresatow;
+}

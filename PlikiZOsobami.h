@@ -11,10 +11,12 @@ using namespace std;
 class PlikiZOsobami
 {
     vector <Osoba> osoby;
+    vector <string> linieOsob;
     Osoba osoba;
 
 public:
     vector <Osoba> wczytajOsobyZPliku();
+    vector <string> wczytajLinieZPlikuDoWektora();
 };
 
 #endif
