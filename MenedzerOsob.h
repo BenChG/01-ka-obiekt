@@ -32,8 +32,8 @@ public:
     void wyszukajPoImieniu();
     void wyszukajPoNazwisku();
     void wyswietlWszystkieOsoby();
-    void wyswietlLinieOsob();
-    //void usunOsobe();
+    void usunOsobe();
+
 };
 
 #endif

@@ -4,6 +4,7 @@ vector <Osoba> PlikiZOsobami::wczytajOsobyZPliku()
 {
     vector <Osoba> osoby;
     Osoba osoba;
+    osoby.clear();
 
     string imie, nazwisko, numerTelefonu, email, adres;
     int id;

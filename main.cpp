@@ -28,8 +28,7 @@ int main()
             menedzerOsob.wyswietlWszystkieOsoby();
             break;
         case '5':
-            //menedzerOsob.usunOsobe();
-            menedzerOsob.wyswietlLinieOsob();
+            menedzerOsob.usunOsobe();
             break;
         case '9':
             exit(0);
