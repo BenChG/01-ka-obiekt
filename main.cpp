@@ -27,6 +27,9 @@ int main()
         case '4':
             menedzerOsob.wyswietlWszystkieOsoby();
             break;
+        case '5':
+            menedzerOsob.usunOsobe();
+            break;
         case '9':
             exit(0);
             break;

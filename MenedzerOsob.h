@@ -13,6 +13,7 @@ class MenedzerOsob
     PlikiZOsobami plikiZOsobami;
 
     vector <Osoba> osoby;
+    vector <string> linieOsob;
     string podaneImie;
     string podaneNazwisko;
 
@@ -24,12 +25,15 @@ public:
     MenedzerOsob()
     {
      osoby=plikiZOsobami.wczytajOsobyZPliku();
+     linieOsob=plikiZOsobami.wczytajLinieZPlikuDoWektora();
     };
 
     Osoba dodajOsobe();
     void wyszukajPoImieniu();
     void wyszukajPoNazwisku();
     void wyswietlWszystkieOsoby();
+    void usunOsobe();
+
 };
 
 #endif

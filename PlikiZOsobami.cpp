@@ -4,6 +4,7 @@ vector <Osoba> PlikiZOsobami::wczytajOsobyZPliku()
 {
     vector <Osoba> osoby;
     Osoba osoba;
+    osoby.clear();
 
     string imie, nazwisko, numerTelefonu, email, adres;
     int id;
@@ -65,4 +66,28 @@ vector <Osoba> PlikiZOsobami::wczytajOsobyZPliku()
     }
     return osoby;
 
+}
+
+ vector <string> PlikiZOsobami::wczytajLinieZPlikuDoWektora ()
+{
+    vector <string> linieAdresatow;
+    string linia;
+    fstream plik;
+    linieAdresatow.clear();
+
+    plik.open("KsiazkaAdresowa.txt",ios::in);
+
+    if (plik.good()==false)
+    {
+        ofstream plik("KsiazkaAdresowa.txt");
+        plik.open("KsiazkaAdresowa.txt",ios::in);
+    }
+
+    while(getline(plik,linia))
+    {
+        linieAdresatow.push_back(linia);
+    }
+    plik.close();
+
+    return linieAdresatow;
 }

@@ -12,6 +12,7 @@ char MetodyPomocnicze::wybierzOpcjeZMenuGlownego()
     cout << "2. Wyszukaj po imieniu" << endl;
     cout << "3. Wyszukaj po nazwisku" << endl;
     cout << "4. Wyswietl wszystkie osoby" << endl;
+    cout << "5. Usun osobe" << endl;
     cout << "9. Zakoncz program" << endl;
     cout << "---------------------------" << endl;
     cout << "Twoj wybor: ";
