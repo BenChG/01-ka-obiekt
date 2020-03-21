@@ -33,6 +33,10 @@ public:
     void wyszukajPoNazwisku();
     void wyswietlWszystkieOsoby();
     void usunOsobe();
+    void edytujOsobe();
+    string edycjaDanych(Osoba osoba, string trescDoEdycji, string zmianaDanych, char wybor);
+    void wyswietlOsobe(Osoba osoba);
+
 
 };
 

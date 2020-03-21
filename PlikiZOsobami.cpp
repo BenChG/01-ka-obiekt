@@ -29,7 +29,6 @@ vector <Osoba> PlikiZOsobami::wczytajOsobyZPliku()
             }
         }
 
-
         nowyWyraz=linia.substr(start,ostatniZnak[0]-start);
         id=atoi(linia.c_str());
         start=ostatniZnak[0]+1;
