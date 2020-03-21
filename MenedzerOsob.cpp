@@ -39,18 +39,18 @@ Osoba MenedzerOsob::dodajOsobe()
     if (plik.good() == true)
     {
         plik << osoba.pobierzId();
-        plik <<"|";
+        plik << "|";
         plik << osoba.pobierzImie();
-        plik <<"|";
+        plik << "|";
         plik << osoba.pobierzNazwisko();
-        plik <<"|";
+        plik << "|";
         plik << osoba.pobierzNumerTelefonu();
-        plik <<"|";
+        plik << "|";
         plik << osoba.pobierzEmail();
-        plik <<"|";
+        plik << "|";
         plik << osoba.pobierzAdres();
-        plik <<"|";
-        plik <<endl;
+        plik << "|";
+        plik << endl;
         plik.close();
     }
     else
@@ -195,7 +195,7 @@ void MenedzerOsob::usunOsobe()
 {
     system("cls");
 
-    int ileOsob=linieOsob.size();
+    int ileOsob=linieOsob.size()-1;
 
     if (!osoby.empty())
     {
@@ -210,7 +210,7 @@ void MenedzerOsob::usunOsobe()
             fstream plik;
             plik.open("KsiazkaAdresowa.txt",ios::out);
 
-            for (int i=0; i<=ileOsob-1; i++)
+            for (int i=0; i<=ileOsob; i++)
             {
                 int id=atoi(linieOsob[i].c_str());
 
@@ -239,4 +239,146 @@ void MenedzerOsob::usunOsobe()
         cout << endl << "Ksiazka adresowa jest pusta." << endl << endl;
     }
     system("pause");
+}
+
+
+string MenedzerOsob::edycjaDanych(Osoba osoba, string linia, string zmianaDanych, char wybor)
+{
+    int dlugoscLinii=linia.length();
+
+    string id;
+    string imie;
+    string nazwisko;
+    string numerTelefonu;
+    string email;
+    string adres;
+    int ostatniZnak[6];
+    string nowyWyraz;
+    int k=0, start=0;
+
+    for (int i=0; i<dlugoscLinii; i++)
+    {
+        if(linia[i]==124)
+        {
+            ostatniZnak[k]=i;
+            k++;
+        }
+    }
+    nowyWyraz=linia.substr(start,ostatniZnak[0]-start);
+    id=nowyWyraz;
+    start=ostatniZnak[0]+1;
+
+    nowyWyraz=linia.substr(start,ostatniZnak[1]-start);
+    imie=nowyWyraz;
+    start=ostatniZnak[1]+1;
+
+    nowyWyraz=linia.substr(start,ostatniZnak[2]-start);
+    nazwisko=nowyWyraz;
+    start=ostatniZnak[2]+1;
+
+    nowyWyraz=linia.substr(start,ostatniZnak[3]-start);
+    numerTelefonu=nowyWyraz;
+    start=ostatniZnak[3]+1;
+
+    nowyWyraz=linia.substr(start,ostatniZnak[4]-start);
+    email=nowyWyraz;
+    start=ostatniZnak[4]+1;
+
+    nowyWyraz=linia.substr(start,ostatniZnak[5]-start);
+    adres=nowyWyraz;
+
+    if (wybor == '1')
+    {
+        imie=zmianaDanych;
+    }
+    else if (wybor == '2')
+    {
+        nazwisko=zmianaDanych;
+    }
+    else if (wybor == '3')
+    {
+        numerTelefonu=zmianaDanych;
+    }
+    else if (wybor == '4')
+    {
+        email=zmianaDanych;
+    }
+    else if (wybor == '5')
+    {
+        adres=zmianaDanych;
+    }
+
+    linia=id+"|"+imie+"|"+nazwisko+"|"+numerTelefonu+"|"+email+"|"+adres+"|";
+    return linia;
+}
+
+void MenedzerOsob::edytujOsobe()
+{
+    Osoba osoba;
+    int ileOsob=linieOsob.size()-1;
+    char wybor;
+    int osobaDoEdycji;
+    string zmianaDanych="";
+    string czyZnaleziono="NIE";
+
+    cout << "Podaj ID osoby, ktorej dane chcesz edytowac: " << endl;
+    cin >> osobaDoEdycji;
+
+    fstream plik;
+    plik.open("KsiazkaAdresowa.txt", ios::out);
+
+    for (int itr = 0; itr <= ileOsob; itr++)
+    {
+        int id=atoi(linieOsob[itr].c_str());
+        if (id==osobaDoEdycji)
+        {
+            cout << "Wybierz z Menu dana, ktora chcesz edytowac: " << endl << endl;
+
+            cout << "--------------Edycja Osoby----------------" << endl;
+            cout << "1. Imie" << endl;
+            cout << "2. Nazwisko" << endl;
+            cout << "3. Numer telefonu." << endl;
+            cout << "4. E-mail." << endl;
+            cout << "5. Adres." << endl;
+            cout << "6. Powrot do menu" << endl;
+            cout <<"-----------------------------------------"<< endl;
+            cin >> wybor;
+
+              if (wybor == '6')
+            {
+                exit (0);
+            }
+
+            else
+            {
+            cout << "Podaj nowa tresc wybranej danej: " << endl;
+            cin >> zmianaDanych;
+
+            string trescDoEdycji=linieOsob[itr];
+
+            plik << edycjaDanych(osoba, trescDoEdycji, zmianaDanych, wybor) << endl;
+
+            czyZnaleziono="TAK";
+            }
+        }
+        else
+        {
+            plik << linieOsob[itr] << endl;
+        }
+    }
+    plik.close();
+
+    if (czyZnaleziono=="TAK")
+    {
+        cout << "Dane osoby o ID nr: " << osobaDoEdycji << " zostaly zmienione." << endl;
+        system("pause");
+    }
+    else
+    {
+        cout << "Brak osoby w ksiazce adresowej o nr ID: " << osobaDoEdycji << endl;
+        system("pause");
+    }
+
+    osoby=plikiZOsobami.wczytajOsobyZPliku();
+    linieOsob=plikiZOsobami.wczytajLinieZPlikuDoWektora();
 }

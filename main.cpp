@@ -30,6 +30,9 @@ int main()
         case '5':
             menedzerOsob.usunOsobe();
             break;
+        case '6':
+            menedzerOsob.edytujOsobe();
+            break;
         case '9':
             exit(0);
             break;
