@@ -1,11 +1,11 @@
-#ifndef OSOBA_H
-#define OSOBA_H
+#ifndef ADRESAT_H
+#define ADRESAT_H
 
 #include <iostream>
 
 using namespace std;
 
-class Osoba
+class Adresat
 {
     int id;
     string imie;

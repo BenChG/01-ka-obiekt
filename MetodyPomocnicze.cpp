@@ -3,17 +3,17 @@
 char MetodyPomocnicze::wybierzOpcjeZMenuGlownego()
 {
     char wybor;
-    MenedzerOsob menedzerOsob;
+    AdresatMenedzer adresatMenedzer;
 
     system("cls");
     cout << "    >>> MENU  GLOWNE <<<" << endl;
     cout << "---------------------------" << endl;
-    cout << "1. Dodaj osobe" << endl;
+    cout << "1. Dodaj adreata" << endl;
     cout << "2. Wyszukaj po imieniu" << endl;
     cout << "3. Wyszukaj po nazwisku" << endl;
-    cout << "4. Wyswietl wszystkie osoby" << endl;
-    cout << "5. Usun osobe" << endl;
-    cout << "6. Edytuj osobe" << endl;
+    cout << "4. Wyswietl wszystkich adresatow" << endl;
+    cout << "5. Usun adresata" << endl;
+    cout << "6. Edytuj adresata" << endl;
     cout << "9. Zakoncz program" << endl;
     cout << "---------------------------" << endl;
     cout << "Twoj wybor: ";
@@ -50,7 +50,7 @@ string MetodyPomocnicze::wczytajLinie()
 string MetodyPomocnicze::podajImie()
 {
     string imie;
-    cout << "Podaj imie osoby jaka mamy wyszukac: ";
+    cout << "Podaj imie adresata, ktorego chcesz wyszukac: ";
     imie = wczytajLinie();
     return imie;
 }
@@ -58,7 +58,7 @@ string MetodyPomocnicze::podajImie()
 string MetodyPomocnicze::podajNazwisko()
 {
     string nazwisko;
-    cout << "Podaj nazwisko osoby jaka mamy wyszukac: ";
+    cout << "Podaj nazwisko adresata, ktorego chcesz wyszukac: ";
     nazwisko = wczytajLinie();
     return nazwisko;
 }

@@ -1,12 +1,12 @@
 #include "MetodyPomocnicze.h"
-#include "MenedzerOsob.h"
+#include "AdresatMenedzer.h"
 
 using namespace std;
 
 int main()
 {
     MetodyPomocnicze metodyPomocnicze;
-    MenedzerOsob menedzerOsob;
+    AdresatMenedzer adresatMenedzer;
 
     char wybor;
     while (true)
@@ -16,22 +16,22 @@ int main()
         switch (wybor)
         {
         case '1':
-            menedzerOsob.dodajOsobe();
+            adresatMenedzer.dodajAdresata();
             break;
         case '2':
-            menedzerOsob.wyszukajPoImieniu();
+            adresatMenedzer.wyszukajPoImieniu();
             break;
         case '3':
-            menedzerOsob.wyszukajPoNazwisku();
+            adresatMenedzer.wyszukajPoNazwisku();
             break;
         case '4':
-            menedzerOsob.wyswietlWszystkieOsoby();
+            adresatMenedzer.wyswietlWszystkichAdresatow();
             break;
         case '5':
-            menedzerOsob.usunOsobe();
+            adresatMenedzer.usunAdresata();
             break;
         case '6':
-            menedzerOsob.edytujOsobe();
+            adresatMenedzer.edytujAdresata();
             break;
         case '9':
             exit(0);

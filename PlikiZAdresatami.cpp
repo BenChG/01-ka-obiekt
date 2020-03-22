@@ -1,10 +1,10 @@
-#include "PlikiZOsobami.h"
+#include "PlikiZAdresatami.h"
 
-vector <Osoba> PlikiZOsobami::wczytajOsobyZPliku()
+vector <Adresat> PlikiZAdresatami::wczytajAdresatowZPliku()
 {
-    vector <Osoba> osoby;
-    Osoba osoba;
-    osoby.clear();
+    vector <Adresat> adresaci;
+    Adresat adresat;
+    adresaci.clear();
 
     string imie, nazwisko, numerTelefonu, email, adres;
     int id;
@@ -52,22 +52,22 @@ vector <Osoba> PlikiZOsobami::wczytajOsobyZPliku()
         nowyWyraz=linia.substr(start,ostatniZnak[5]-start);
         adres=nowyWyraz;
 
-            osoba.ustawId(id);
-            osoba.ustawImie(imie);
-            osoba.ustawNazwisko(nazwisko);
-            osoba.ustawNumerTelefonu(numerTelefonu);
-            osoba.ustawEmail(email);
-            osoba.ustawAdres(adres);
+            adresat.ustawId(id);
+            adresat.ustawImie(imie);
+            adresat.ustawNazwisko(nazwisko);
+            adresat.ustawNumerTelefonu(numerTelefonu);
+            adresat.ustawEmail(email);
+            adresat.ustawAdres(adres);
 
-            osoby.push_back(osoba);
+            adresaci.push_back(adresat);
         }
         plik.close();
     }
-    return osoby;
+    return adresaci;
 
 }
 
- vector <string> PlikiZOsobami::wczytajLinieZPlikuDoWektora ()
+ vector <string> PlikiZAdresatami::wczytajLinieZPlikuDoWektora ()
 {
     vector <string> linieAdresatow;
     string linia;

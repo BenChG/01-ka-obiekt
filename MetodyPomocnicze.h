@@ -1,7 +1,7 @@
 #ifndef METODYPOMOCNICZE_H
 #define METODYPOMOCNICZE_H
 
-#include "MenedzerOsob.h"
+#include "AdresatMenedzer.h"
 
 using namespace std;
 
