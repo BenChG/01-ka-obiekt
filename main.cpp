@@ -31,7 +31,7 @@ int main()
             adresatMenedzer.usunAdresata();
             break;
         case '6':
-            adresatMenedzer.edytujAdresata();
+            adresatMenedzer.wyszukajAdresataDoEdycji();
             break;
         case '9':
             exit(0);

@@ -5,10 +5,12 @@ void Adresat::ustawId(int noweId)
     if (noweId >= 0)
         id = noweId;
 }
+
 void Adresat::ustawImie (string noweImie)
 {
     imie = noweImie;
 }
+
 void Adresat::ustawNazwisko (string noweNazwisko)
 {
     nazwisko = noweNazwisko;

@@ -14,6 +14,7 @@ public:
     string wczytajLinie();
     string podajImie();
     string podajNazwisko();
+    char wybierzDanaDoEdycji();
 };
 
 #endif

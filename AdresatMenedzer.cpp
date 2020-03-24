@@ -4,16 +4,22 @@ Adresat AdresatMenedzer::dodajAdresata()
 {
     Adresat adresat;
     MetodyPomocnicze metodyPomocnicze;
+
     string imie, nazwisko, numerTelefonu, email, adres;
     int id=1;
+
     cout << "Podaj imie: ";
     imie = metodyPomocnicze.wczytajLinie();
+
     cout << "Podaj nazwisko: ";
     nazwisko = metodyPomocnicze.wczytajLinie();
+
     cout << "Podaj numer telefonu: ";
     numerTelefonu = metodyPomocnicze.wczytajLinie();
+
     cout << "Podaj email: ";
     email = metodyPomocnicze.wczytajLinie();
+
     cout << "Podaj adres: ";
     adres = metodyPomocnicze.wczytajLinie();
 
@@ -22,7 +28,6 @@ Adresat AdresatMenedzer::dodajAdresata()
         int ostatniElement=linieAdresatow.size()-1;
         id=atoi(linieAdresatow[ostatniElement].c_str())+1;
     }
-
 
     adresat.ustawId(id);
     adresat.ustawImie(imie);
@@ -52,16 +57,16 @@ Adresat AdresatMenedzer::dodajAdresata()
         plik << "|";
         plik << endl;
         plik.close();
+
+    cout << endl << "Adresat zostal dodany." << endl;
+    cout << "Wielkosc wektora adresaci: " << adresaci.size() << endl << endl;
     }
+
     else
     {
-        cout << "Nie udalo sie otworzyc pliku i zapisac do niego danych." << endl;
-        system("pause");
+        cout << "Nie udalo sie otworzyc pliku i zapisac do niego danych." << endl << endl;
     }
-    cout << endl << "Adresat zostal dodany." << endl;
-    system("pause");
 
-    cout << "Wielkosc wektora adresaci: " << adresaci.size() << endl;
     system("pause");
 
     linieAdresatow=plikiZAdresatami.wczytajLinieZPlikuDoWektora();
@@ -82,14 +87,11 @@ void AdresatMenedzer::wyszukajPoImieniu()
         {
             czyZnalezionoImie="TAK";
         }
-
     }
-    if (czyZnalezionoImie!="TAK")
+    if (czyZnalezionoImie=="NIE")
     {
-        cout << "Brak adresata o podanym imieniu w ksiazce adresowej." << endl;
-        system("pause");
+        cout << "Brak adresata o podanym imieniu w ksiazce adresowej." << endl << endl;
     }
-    else
         system("pause");
 }
 
@@ -107,6 +109,7 @@ string AdresatMenedzer::wyswietlaniePoImieniu (Adresat adresat, string podaneImi
         string czyZnalezionoImie = "TAK";
         return czyZnalezionoImie;
     }
+
     else
     {
         string czyZnalezionoNazwisko = "NIE";
@@ -129,12 +132,11 @@ void AdresatMenedzer::wyszukajPoNazwisku()
             czyZnalezionoNazwisko="TAK";
         }
     }
-    if (czyZnalezionoNazwisko!="TAK")
+
+    if (czyZnalezionoNazwisko=="NIE")
     {
-        cout << "Brak adresata o podanym nazwisku w ksiazce adresowej." << endl;
-        system("pause");
+        cout << "Brak adresata o podanym nazwisku w ksiazce adresowej." << endl << endl;
     }
-    else
         system("pause");
 }
 
@@ -145,13 +147,15 @@ string AdresatMenedzer::wyswietlaniePoNazwisku(Adresat adresat, string podaneNaz
         cout << endl;
         cout << "ID: " << adresat.pobierzId()<< endl;
         cout << adresat.pobierzImie() << " " << adresat.pobierzNazwisko() << endl;
-        cout << "Telefon: " <<adresat.pobierzNumerTelefonu() << endl;
+        cout << "Telefon: " << adresat.pobierzNumerTelefonu() << endl;
         cout << "Email: " << adresat.pobierzEmail() << endl;
         cout << "Adres: " << adresat.pobierzAdres() << endl;
         cout << endl;
         string czyZnalezionoNazwisko = "TAK";
+
         return czyZnalezionoNazwisko;
     }
+
     else
     {
         string czyZnalezionoNazwisko = "NIE";
@@ -180,10 +184,11 @@ void AdresatMenedzer::wyswietlWszystkichAdresatow()
         for (vector <Adresat> :: iterator itr = adresaci.begin(); itr != adresaci.end(); itr++)
         {
             wyswietlDaneAdresata(*itr);
-            cout<<endl;
+            cout << endl;
         }
         cout << endl;
     }
+
     else
     {
         cout << endl << "Ksiazka adresowa jest pusta." << endl << endl;
@@ -195,56 +200,72 @@ void AdresatMenedzer::usunAdresata()
 {
     system("cls");
 
-    int ileAdresatow=linieAdresatow.size()-1;
+    int liczbaAdresatow=linieAdresatow.size()-1;
 
-    if (!adresaci.empty())
+    int adresatDoUsuniecia;
+    char czyPotwierdzono;
+    string czyZnalezionoAdresata="NIE";
+
+    cout << "Podaj nr ID adresata, ktory ma zostac usuniety: " << endl;
+    cin >> adresatDoUsuniecia;
+
+    cout << "Nacisnij 't', aby potwierdzic usunecie adresata o nr ID: " << adresatDoUsuniecia << endl;
+    cin >> czyPotwierdzono;
+
+    if (czyPotwierdzono=='t')
     {
-        int adresatDoUsuniecia;
-        char czyPotwierdzono;
-        cout << "Podaj nr ID adresata, ktory ma zostac usuniety: " << endl;
-        cin>>adresatDoUsuniecia;
-        cout << "Nacisnij 't', aby potwierdzic usunecie adresata o nr ID: "<<adresatDoUsuniecia<<endl;
-        cin>>czyPotwierdzono;
-        if (czyPotwierdzono=='t')
-        {
-            fstream plik;
-            plik.open("KsiazkaAdresowa.txt",ios::out);
+        fstream plik;
+        plik.open("KsiazkaAdresowa.txt",ios::out);
 
-            for (int i=0; i<=ileAdresatow; i++)
+        if (plik.good() == true)
+        {
+
+            for (int i=0; i<=liczbaAdresatow; i++)
+
             {
                 int id=atoi(linieAdresatow[i].c_str());
 
                 if (id!=adresatDoUsuniecia)
                 {
-                    plik<<linieAdresatow[i]<<endl;
+                    plik << linieAdresatow[i] << endl;
                 }
+
                 else
                 {
-                    cout << "Adresat o nr ID: " << adresatDoUsuniecia << " zostal usuniety." << endl<<endl;
+                    czyZnalezionoAdresata="TAK";
                 }
             }
             plik.close();
+        }
 
-            adresaci=plikiZAdresatami.wczytajAdresatowZPliku();
-            linieAdresatow=plikiZAdresatami.wczytajLinieZPlikuDoWektora();
+        if (czyZnalezionoAdresata=="TAK")
+        {
+            cout << "Adresat o ID nr: " << adresatDoUsuniecia << " zostal usuniety." << endl << endl;
         }
 
         else
         {
-            cout << "Z powodu braku potwierdzenia adresat nie zostal usuniety."<<endl;
+            cout << "Brak adresata o nr ID: " << adresatDoUsuniecia << " w ksiazce adresowej." << endl << endl;
         }
+
+        adresaci=plikiZAdresatami.wczytajAdresatowZPliku();
+        linieAdresatow=plikiZAdresatami.wczytajLinieZPlikuDoWektora();
     }
+
     else
     {
-        cout << endl << "Ksiazka adresowa jest pusta." << endl << endl;
+        cout << "Z powodu braku potwierdzenia adresat nie zostal usuniety." << endl << endl;
     }
+
     system("pause");
 }
 
-
-string AdresatMenedzer::edycjaDanych(Adresat adresat, string linia, string zmianaDanych, char wybor)
+string AdresatMenedzer::edytujAdresata(Adresat adresat, string linia, string zmianaDanych, char wybor)
 {
     int dlugoscLinii=linia.length();
+    int ostatniZnak[6];
+    int k=0;
+    int pierwszyZnak=0;
 
     string id;
     string imie;
@@ -252,39 +273,38 @@ string AdresatMenedzer::edycjaDanych(Adresat adresat, string linia, string zmian
     string numerTelefonu;
     string email;
     string adres;
-    int ostatniZnak[6];
-    string nowyWyraz;
-    int k=0, start=0;
 
-    for (int i=0; i<dlugoscLinii; i++)
+    string nowyWyraz;
+
+    for (int znak=0; znak<dlugoscLinii; znak++)
     {
-        if(linia[i]==124)
+        if(linia[znak]==124)
         {
-            ostatniZnak[k]=i;
+            ostatniZnak[k]=znak;
             k++;
         }
     }
-    nowyWyraz=linia.substr(start,ostatniZnak[0]-start);
+    nowyWyraz=linia.substr(pierwszyZnak,ostatniZnak[0]-pierwszyZnak);
     id=nowyWyraz;
-    start=ostatniZnak[0]+1;
+    pierwszyZnak=ostatniZnak[0]+1;
 
-    nowyWyraz=linia.substr(start,ostatniZnak[1]-start);
+    nowyWyraz=linia.substr(pierwszyZnak,ostatniZnak[1]-pierwszyZnak);
     imie=nowyWyraz;
-    start=ostatniZnak[1]+1;
+    pierwszyZnak=ostatniZnak[1]+1;
 
-    nowyWyraz=linia.substr(start,ostatniZnak[2]-start);
+    nowyWyraz=linia.substr(pierwszyZnak,ostatniZnak[2]-pierwszyZnak);
     nazwisko=nowyWyraz;
-    start=ostatniZnak[2]+1;
+    pierwszyZnak=ostatniZnak[2]+1;
 
-    nowyWyraz=linia.substr(start,ostatniZnak[3]-start);
+    nowyWyraz=linia.substr(pierwszyZnak,ostatniZnak[3]-pierwszyZnak);
     numerTelefonu=nowyWyraz;
-    start=ostatniZnak[3]+1;
+    pierwszyZnak=ostatniZnak[3]+1;
 
-    nowyWyraz=linia.substr(start,ostatniZnak[4]-start);
+    nowyWyraz=linia.substr(pierwszyZnak,ostatniZnak[4]-pierwszyZnak);
     email=nowyWyraz;
-    start=ostatniZnak[4]+1;
+    pierwszyZnak=ostatniZnak[4]+1;
 
-    nowyWyraz=linia.substr(start,ostatniZnak[5]-start);
+    nowyWyraz=linia.substr(pierwszyZnak,ostatniZnak[5]-pierwszyZnak);
     adres=nowyWyraz;
 
     if (wybor == '1')
@@ -312,73 +332,77 @@ string AdresatMenedzer::edycjaDanych(Adresat adresat, string linia, string zmian
     return linia;
 }
 
-void AdresatMenedzer::edytujAdresata()
+void AdresatMenedzer::wyszukajAdresataDoEdycji()
 {
     Adresat adresat;
-    int ileAdresatow=linieAdresatow.size()-1;
-    char wybor;
-    int adresatDoEdycji;
-    string zmianaDanych="";
-    string czyZnaleziono="NIE";
+    MetodyPomocnicze metodyPomocnicze;
 
-    cout << "Podaj ID adresata, ktorej dane chcesz edytowac: " << endl;
-    cin >> adresatDoEdycji;
-
-    fstream plik;
-    plik.open("KsiazkaAdresowa.txt", ios::out);
-
-    for (int itr = 0; itr <= ileAdresatow; itr++)
+    if (!adresaci.empty())
     {
-        int id=atoi(linieAdresatow[itr].c_str());
-        if (id==adresatDoEdycji)
+        int ileAdresatow=linieAdresatow.size()-1;
+        int adresatDoEdycji;
+        char wybor;
+        string zmianaDanych="";
+        string czyZnalezionoAdresata="NIE";
+
+        cout << "Podaj ID adresata, ktorej dane chcesz edytowac: " << endl;
+        cin >> adresatDoEdycji;
+
+        fstream plik;
+        plik.open("KsiazkaAdresowa.txt", ios::out);
+
+        if (plik.good() == true)
         {
-            cout << "Wybierz z Menu dana, ktora chcesz edytowac: " << endl << endl;
-
-            cout << "--------------Edycja Adresata----------------" << endl;
-            cout << "1. Imie" << endl;
-            cout << "2. Nazwisko" << endl;
-            cout << "3. Numer telefonu." << endl;
-            cout << "4. E-mail." << endl;
-            cout << "5. Adres." << endl;
-            cout << "6. Powrot do menu" << endl;
-            cout <<"-----------------------------------------"<< endl;
-            cin >> wybor;
-
-              if (wybor == '6')
+            for (int itr = 0; itr <= ileAdresatow; itr++)
             {
-                exit (0);
+                int id=atoi(linieAdresatow[itr].c_str());
+                if (id==adresatDoEdycji)
+                {
+                    wybor=metodyPomocnicze.wybierzDanaDoEdycji();
+
+                    if (wybor == '6')
+                    {
+                        exit (0);
+                    }
+
+                    else
+                    {
+                        cout << "Podaj nowa tresc wybranej danej: " << endl;
+                        cin >> zmianaDanych;
+
+                        string trescDoEdycji=linieAdresatow[itr];
+
+                        plik << edytujAdresata(adresat, trescDoEdycji, zmianaDanych, wybor) << endl;
+
+                        czyZnalezionoAdresata="TAK";
+                    }
+                }
+
+                else
+                {
+                    plik << linieAdresatow[itr] << endl;
+                }
+            }
+            plik.close();
+
+            if (czyZnalezionoAdresata=="TAK")
+            {
+                cout << "Dane adresata o ID nr: " << adresatDoEdycji << " zostaly zmienione." << endl << endl;
             }
 
             else
             {
-            cout << "Podaj nowa tresc wybranej danej: " << endl;
-            cin >> zmianaDanych;
-
-            string trescDoEdycji=linieAdresatow[itr];
-
-            plik << edycjaDanych(adresat, trescDoEdycji, zmianaDanych, wybor) << endl;
-
-            czyZnaleziono="TAK";
+                cout << "Brak adresata o nr ID: " << adresatDoEdycji << " w ksiazce adresowej." << endl << endl;
             }
-        }
-        else
-        {
-            plik << linieAdresatow[itr] << endl;
-        }
-    }
-    plik.close();
+            system("pause");
 
-    if (czyZnaleziono=="TAK")
-    {
-        cout << "Dane adresata o ID nr: " << adresatDoEdycji << " zostaly zmienione." << endl;
-        system("pause");
+            adresaci=plikiZAdresatami.wczytajAdresatowZPliku();
+            linieAdresatow=plikiZAdresatami.wczytajLinieZPlikuDoWektora();
+        }
     }
+
     else
     {
-        cout << "Brak adresata w ksiazce adresowej o nr ID: " << adresatDoEdycji << endl;
-        system("pause");
+        cout << endl << "Ksiazka adresowa jest pusta." << endl << endl;
     }
-
-    adresaci=plikiZAdresatami.wczytajAdresatowZPliku();
-    linieAdresatow=plikiZAdresatami.wczytajLinieZPlikuDoWektora();
 }

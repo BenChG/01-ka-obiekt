@@ -20,12 +20,13 @@ class AdresatMenedzer
     void wyswietlDaneAdresata(Adresat adresat);
     string wyswietlaniePoImieniu(Adresat adresat, string podaneImie);
     string wyswietlaniePoNazwisku(Adresat adresat, string podaneNazwisko);
+    string edytujAdresata(Adresat adresat, string trescDoEdycji, string zmianaDanych, char wybor);
 
 public:
     AdresatMenedzer()
     {
-     adresaci=plikiZAdresatami.wczytajAdresatowZPliku();
-     linieAdresatow=plikiZAdresatami.wczytajLinieZPlikuDoWektora();
+        adresaci=plikiZAdresatami.wczytajAdresatowZPliku();
+        linieAdresatow=plikiZAdresatami.wczytajLinieZPlikuDoWektora();
     };
 
     Adresat dodajAdresata();
@@ -33,9 +34,7 @@ public:
     void wyszukajPoNazwisku();
     void wyswietlWszystkichAdresatow();
     void usunAdresata();
-    void edytujAdresata();
-    string edycjaDanych(Adresat adresat, string trescDoEdycji, string zmianaDanych, char wybor);
-    void wyswietlAdresata(Adresat adresat);
+    void wyszukajAdresataDoEdycji();
 };
 
 #endif

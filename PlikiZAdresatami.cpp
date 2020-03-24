@@ -14,43 +14,44 @@ vector <Adresat> PlikiZAdresatami::wczytajAdresatowZPliku()
 
     fstream plik;
     plik.open("KsiazkaAdresowa.txt",ios::in);
+
     if (plik.good() == true)
     {
-         while(getline(plik,linia))
-    {
-        int k=0, start=0, dlugoscLinii=linia.length();
-
-        for (int i=0; i<dlugoscLinii; i++)
+        while(getline(plik,linia))
         {
-            if(linia[i]==124)
+            int k=0, pierwszyZnak=0, dlugoscLinii=linia.length();
+
+            for (int i=0; i<dlugoscLinii; i++)
             {
-                ostatniZnak[k]=i;
-                k++;
+                if(linia[i]==124)
+                {
+                    ostatniZnak[k]=i;
+                    k++;
+                }
             }
-        }
 
-        nowyWyraz=linia.substr(start,ostatniZnak[0]-start);
-        id=atoi(linia.c_str());
-        start=ostatniZnak[0]+1;
+            nowyWyraz=linia.substr(pierwszyZnak,ostatniZnak[0]-pierwszyZnak);
+            id=atoi(linia.c_str());
+            pierwszyZnak=ostatniZnak[0]+1;
 
-        nowyWyraz=linia.substr(start,ostatniZnak[1]-start);
-        imie=nowyWyraz;
-        start=ostatniZnak[1]+1;
+            nowyWyraz=linia.substr(pierwszyZnak,ostatniZnak[1]-pierwszyZnak);
+            imie=nowyWyraz;
+            pierwszyZnak=ostatniZnak[1]+1;
 
-        nowyWyraz=linia.substr(start,ostatniZnak[2]-start);
-        nazwisko=nowyWyraz;
-        start=ostatniZnak[2]+1;
+            nowyWyraz=linia.substr(pierwszyZnak,ostatniZnak[2]-pierwszyZnak);
+            nazwisko=nowyWyraz;
+            pierwszyZnak=ostatniZnak[2]+1;
 
-        nowyWyraz=linia.substr(start,ostatniZnak[3]-start);
-        numerTelefonu=nowyWyraz;
-        start=ostatniZnak[3]+1;
+            nowyWyraz=linia.substr(pierwszyZnak,ostatniZnak[3]-pierwszyZnak);
+            numerTelefonu=nowyWyraz;
+            pierwszyZnak=ostatniZnak[3]+1;
 
-        nowyWyraz=linia.substr(start,ostatniZnak[4]-start);
-        email=nowyWyraz;
-        start=ostatniZnak[4]+1;
+            nowyWyraz=linia.substr(pierwszyZnak,ostatniZnak[4]-pierwszyZnak);
+            email=nowyWyraz;
+            pierwszyZnak=ostatniZnak[4]+1;
 
-        nowyWyraz=linia.substr(start,ostatniZnak[5]-start);
-        adres=nowyWyraz;
+            nowyWyraz=linia.substr(pierwszyZnak,ostatniZnak[5]-pierwszyZnak);
+            adres=nowyWyraz;
 
             adresat.ustawId(id);
             adresat.ustawImie(imie);
@@ -64,29 +65,25 @@ vector <Adresat> PlikiZAdresatami::wczytajAdresatowZPliku()
         plik.close();
     }
     return adresaci;
-
 }
 
- vector <string> PlikiZAdresatami::wczytajLinieZPlikuDoWektora ()
+vector <string> PlikiZAdresatami::wczytajLinieZPlikuDoWektora ()
 {
     vector <string> linieAdresatow;
     string linia;
-    fstream plik;
     linieAdresatow.clear();
 
+    fstream plik;
     plik.open("KsiazkaAdresowa.txt",ios::in);
 
-    if (plik.good()==false)
+    if (plik.good()==true)
     {
-        ofstream plik("KsiazkaAdresowa.txt");
-        plik.open("KsiazkaAdresowa.txt",ios::in);
+        while(getline(plik,linia))
+        {
+            linieAdresatow.push_back(linia);
+        }
+        plik.close();
     }
-
-    while(getline(plik,linia))
-    {
-        linieAdresatow.push_back(linia);
-    }
-    plik.close();
 
     return linieAdresatow;
 }
