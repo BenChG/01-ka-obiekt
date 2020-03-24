@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>30</x>
+      <y>390</y>
+      <w>330</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>PlikiZAdresatami
+--
+- adresaci: vector &lt;Adresat&gt; 
+- linieAdresatow: vector &lt;string&gt;
+- linia: String
+- ostatniZnak: Integer
+- nowyWyaz: String
+- pierwszyZnak: Integer
+- dlugoscLinii: Integer
+--
++ wczytajOsobyZPliku(): vector &lt;Adresat&gt; 
++ wczytajLinieZPlikuDoWektora(): vector &lt;string&gt; 
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>580</x>
+      <y>410</y>
+      <w>270</w>
+      <h>220</h>
+    </coordinates>
+    <panel_attributes>MetodyPomocnicze
+--
+- wejscie: String
+- znak: Char
+- wybor: Char
+- imie: String
+- nazwisko: String
+--
+- wczytajZnak(): Char
++ wybierzOpcjeZMenyGlownego(): Char
++ wczytajLinie(): String
++ string podajImie(): String
++ string podajNazwisko(): String
++ wybierzDanaDoEdycji(): Char
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>70</y>
+      <w>580</w>
+      <h>280</h>
+    </coordinates>
+    <panel_attributes>AdresatMenedzer
+--
+- adresaci: vector &lt;Adresat&gt; 
+- linieAdresatow: vector &lt;string&gt; 
+- podaneImie: String
+- podaneNazwisko: String
+--
+AdresatMenedzer()
+- wyswietlDaneAdresata (Adresat adresat): Void
+- wyswietlPoImieniu (Adresat adresat,string podaneImie): String
+- wyswietlPoNazwisku (Adresat adresat,string podaneImie): String
+- edytujAdresata (Adresat adresat, string trescDoEdycji, string zmianaDanych, char wybor)
++ dodajAdresata(): Adresat
++ wyszukajPoImieniu(): Void
++ wyszukajPoNazwisku(): Void
++ wyswietlWszystkichAdresatow(): Void
++ usunAdresata(): Void
++ wyszukajAdresataDoEdycji(): Void
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>410</x>
+      <y>410</y>
+      <w>90</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>Main
+--
+wybor: Char
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>600</x>
+      <y>60</y>
+      <w>380</w>
+      <h>330</h>
+    </coordinates>
+    <panel_attributes>Adresat
+--
+- id: Integer
+- imie: String
+- nazwisko: String
+- numerTelefonu: String
+- email: String
+- adres: String
+--
++ ustawId(int noweId): Void
++ ustawImie (string noweNazwisko): Void
++ ustawNazwisko (string noweNazwisko): Void
++ ustawNumerTelefonu (string nowyNumerTelefonu): Void
++ ustawEmail(string nowyEmail): Void
++ ustawAdres (string nowyAdres): Void
++ pobierzId(): Integer
++ pobierzImie(): String
++ pobierzNazwisko(): String
++ pobierzNumerTelefonu(): String
++ pobierzEmail(): String
++ pobierzAdres(): String
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
